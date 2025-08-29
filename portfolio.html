@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mansi Gupta — Java/Spring Boot • Full‑Stack Engineer</title>
+    <meta name="description" content="Portfolio of Mansi Gupta — Full‑Stack Software Engineer (4+ yrs). Java, Spring Boot, Vue/React, Kafka, SQL performance tuning, microservices, CI/CD." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root{
+        --bg:#0a0d12; --panel:rgba(255,255,255,.04); --elev:rgba(255,255,255,.08);
+        --text:#dbe2ea; --muted:#97a3b6; --accent:#22d3ee; --accent2:#7c5cff;
+        --ok:#10b981; --warn:#f59e0b; --danger:#ef4444; --card:rgba(255,255,255,.05);
+        --ring:0 0 0 1px rgba(255,255,255,.08) inset; --shadow:0 14px 40px rgba(0,0,0,.35);
+        --radius:18px; --radius-sm:12px; --gap:clamp(14px,2vw,24px); --max:min(1180px,92vw);
+        }
+        [data-theme="light"]{ --bg:#f7fafc; --panel:rgba(0,0,0,.04); --elev:rgba(0,0,0,.08);
+        --text:#0f172a; --muted:#475569; --card:rgba(0,0,0,.05); --ring:0 0 0 1px rgba(2,6,23,.06) inset; --shadow:0 12px 30px rgba(2,6,23,.10);
+        }
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{margin:0;font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--text); background:
+        radial-gradient(1200px 600px at -10% -10%, rgba(34,211,238,.15), transparent 60%),
+        radial-gradient(1200px 600px at 110% 10%, rgba(124,92,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(124,92,255,0.06), transparent 30%), var(--bg);
+        min-height:100dvh;}
+        body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-conic-gradient(from 45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 4px);mix-blend-mode:overlay;opacity:.2}
+        .container{width:var(--max);margin:0 auto;padding:0 8px}
+
+        header.nav{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,var(--panel),transparent);backdrop-filter:saturate(120%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+        .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+        .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+        .logo{width:36px;height:36px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:conic-gradient(from 90deg, var(--accent), var(--accent2), var(--accent))}
+        nav a{color:var(--muted);text-decoration:none;margin:0 8px;padding:8px 10px;border-radius:10px}
+        nav a:hover{background:var(--elev);color:var(--text)}
+        .theme-toggle{border:0;border-radius:12px;background:var(--card);box-shadow:var(--ring);padding:8px 10px;cursor:pointer;color:var(--text)}
+
+        .hero{position:relative;padding:64px 0 28px}
+        .hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--gap);align-items:center}
+        @media (max-width:900px){.hero .grid{grid-template-columns:1fr}}
+
+        .kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.16em;font-size:.8rem}
+        .title{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:10px 0 12px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 20px rgba(124,92,255,.28));}
+        .lead{color:var(--muted);max-width:64ch}
+
+        .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+        .btn:hover {background: var(--elev);color: var(--accent2);}
+        .btn{appearance:none;border:0;padding:10px 14px;
+            border-radius:10px;cursor:pointer;
+            font-weight:600;font-size: 0.95rem;
+            color:white;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 80%, #333), color-mix(in srgb, var(--accent2) 80%, #222));
+            box-shadow: 0 8px 18px rgba(124,92,255,.28), inset 0 0 0 1px rgba(255,255,255,.1);
+            transition: background .2s ease, box-shadow .2s ease;
+            text-decoration: none;
+        } 
+        .btn.secondary{background:var(--card);color:var(--text);box-shadow:var(--ring)}
+        .btn.ghost{background:transparent;color:var(--text);box-shadow:none;border:1px dashed rgba(255,255,255,.25)}
+
+        .hero-card{position:relative;border-radius:var(--radius);padding:16px;background:var(--card);box-shadow:var(--shadow),var(--ring);overflow:hidden;isolation:isolate}
+        .hero-card::before{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:1px;background:linear-gradient(135deg, rgba(34,211,238,.5), rgba(124,92,255,.5));-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
+        .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+        .stat{background:rgba(0,0,0,.18);border-radius:12px;padding:14px;text-align:center}
+        [data-theme="light"] .stat{background:rgba(255,255,255,.65)}
+        .num{font-weight:800;font-size:1.5rem}
+        .label{font-size:.85rem;color:var(--muted)}
+
+        section{padding:56px 0}
+        .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+        h2.section-title{margin:0;font-size:1.6rem}
+        .section-sub{color:var(--muted);font-size:.95rem}
+
+        /* Projects */
+        .grid-12{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
+        .card{grid-column:span 4;background:var(--card);border-radius:var(--radius);padding:16px;position:relative;overflow:hidden;box-shadow:var(--shadow),var(--ring);transform-style:preserve-3d;transition:transform .2s ease, box-shadow .2s ease}
+        .card:hover{box-shadow:0 22px 40px rgba(0,0,0,.35),var(--ring)}
+        .thumb{height:160px;border-radius:12px;background:linear-gradient(135deg,#0b1220,#161c2a);position:relative;overflow:hidden}
+        [data-theme="light"] .thumb{background:linear-gradient(135deg,#dbeafe,#f1f5f9)}
+        .pill{position:absolute;right:10px;top:10px;padding:6px 10px;font-size:.75rem;border-radius:999px;background:rgba(255,255,255,.12);color:var(--text)}
+        .tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 4px}
+        .tag{font-size:.75rem;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted)}
+        .actions{display:flex;gap:10px;margin-top:10px}
+        .btn.small{padding:8px 12px;font-size:.9rem}
+        @media (max-width:1100px){.card{grid-column:span 6}} @media (max-width:700px){.card{grid-column:span 12}}
+
+        /* Skills */
+        .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+        @media (max-width:900px){.skills{grid-template-columns:1fr}}
+        .skill-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow),var(--ring)}
+        .rings{display:flex;gap:15px;flex-wrap:wrap}
+        .ring{--size:90px;--stroke:10px;--val:0;width:var(--size);height:var(--size);border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--accent) calc(var(--val) * 1%), rgba(255,255,255,.1) 0);mask:radial-gradient(circle calc(50% - var(--stroke)), transparent 99%, #000 101%)}
+        .ring span{font-weight:500;font-size:1.1rem}
+        .ring label{position:absolute;bottom:-25px;font-size:.85rem;color:var(--muted)}
+
+        /* Timeline */
+        .timeline{position:relative;margin-left:10px}
+        .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent2));border-radius:2px}
+        .t-item{position:relative;margin-left:40px;padding:12px 14px;background:var(--card);border-radius:12px;box-shadow:var(--shadow),var(--ring)}
+        .t-item + .t-item{margin-top:14px}
+        .t-item::before{content:"";position:absolute;left:-32px;top:16px;width:14px;height:14px;background:linear-gradient(var(--accent),var(--accent2));border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.1)}
+        .t-role{font-weight:700}
+        .t-meta{color:var(--muted);font-size:.9rem}
+
+        /* Contact */
+        .footer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+        .social{display:flex;gap:10px}
+        .social a i { font-size: 1.4rem; }
+        .social a { display:flex;align-items:center;justify-content:center; }
+        .social a {display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--card);color:var(--text);text-decoration:none;box-shadow:var(--ring)}
+        .social a:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white}
+
+        .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
+        .reveal.in{opacity:1;transform:translateY(0)}
+
+        .to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:999px;border:none;color:white;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow);transform:translateY(80px);opacity:0;transition:transform .2s ease, opacity .2s ease;z-index:60}
+        .to-top.show{transform:translateY(0);opacity:1}
+
+        .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+        .badge{font-size:.75rem;background:rgba(255,255,255,.1);color:var(--text);border:1px dashed rgba(255,255,255,.25);padding:6px 10px;border-radius:999px}
+
+        dialog{border:none;border-radius:16px;padding:0;box-shadow:var(--shadow);background:var(--bg);color:var(--text)}
+        .modal{padding:18px;min-width:min(720px,92vw)}
+        .modal header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .close{background:transparent;border:0;color:var(--text);font-size:1.4rem;cursor:pointer}
+        .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+        pre{background:var(--card);padding:12px;border-radius:12px;overflow:auto;box-shadow:var(--ring)}
+    </style>
+    </head>
+    <body>
+        <header class="nav">
+            <div class="container nav-inner">
+            <a class="brand" href="#home" aria-label="Home">
+                <span class="logo" aria-hidden="true"></span><strong>Mansi Gupta</strong></a>
+            <nav>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀︎/☾</button>
+            </div>
+        </header>
+
+        <main id="home" class="hero container">
+            <div class="grid">
+            <div>
+                <div class="kicker">Full-Stack Engineer | Scalable Backend Systems</div>
+                <h1 class="title">Building resilient backend with Java & Spring Boot</h1>
+                <p class="lead">I’m <strong>Mansi Gupta</strong>, a backend-driven full‑stack engineer with <strong>4+ years</strong> of experience turning complex requirements into production‑ready systems. From <strong>SQL caching</strong> that shaved seconds off reports, to <strong>Kafka pipelines</strong> powering real‑time analytics, I focus on building APIs and architectures that scale without drama. I thrive at the intersection of <strong>performance, security, and clean code</strong> — and still enjoy crafting Vue/React frontends when the UI demands a human touch.</p>
+                <div class="badges" aria-label="highlights">
+                    <span class="badge">MFA implementation</span>
+                    <span class="badge">Report generation enhancements</span>
+                    <span class="badge">Restructured SITE SX Trace platform</span>
+                    <span class="badge">Kafka driven events streaming</span>
+                    <span class="badge">Strong communication & mentoring</span>
+                </div>
+                <div class="cta">
+                <a class="btn" href="#projects">See real results</a>
+                <a class="btn" href="#contact">Contact me</a>
+                <a class="btn" href="assets/Mansi_Gupta_Resume.pdf" download="Mansi_Gupta_Resume.pdf" id="resumeBtn">Download résumé (PDF)</a>
+                </div>
+            </div>
+            <aside>
+                <div class="hero-card" role="group" aria-label="stats">
+                <div class="stats">
+                    <div class="stat"><div class="num">4+</div><div class="label">Years building prod systems</div></div>
+                    <div class="stat"><div class="num">40%</div><div class="label">Faster report retrieval</div></div>
+                    <div class="stat"><div class="num">50%</div><div class="label">Lower query latency (400→200ms)</div></div>
+                    <div class="stat"><div class="num">35%</div><div class="label">Faster backend processing</div></div>
+                </div>
+                </div>
+            </aside>
+            </div>
+        </main>
+        
+        <section id="projects">
+            <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Featured Projects & Impact</h2>
+            </div>
+            <div class="grid-12">
+                <article class="card tilt reveal">
+                <div class="thumb"><span class="pill" style="color: #000;">Work · Mobileum</span>
+                    <img src="assets/report.png" alt="SITE Platform Reporting & Trace Acceleration" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
+                </div>
+                <h3>SITE Platform — Reporting & Trace Acceleration</h3>
+                <p>Improved the performance and scalability of Mobileum’s high‑traffic reporting and analytics system. Tackled severe latency issues (reports taking up to 2 minutes) by re‑architecting the data model, introducing SQL caching, and parallelizing backend pipelines, ultimately cutting report generation to under 30 seconds.</p>
+                <div class="tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Spring Boot</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Caching</span>
+                </div>
+                <ul>
+                    <li>Redesigned core SQL schema (split monolithic table into normalized structures) → faster query execution.</li>
+                    <li>Introduced dedicated SQL cache mode + dynamic caching → report retrieval times <strong>↓ 40%</strong>.</li>
+                    <li>Reduced average report generation time from <strong>2 minutes → under 30 seconds</strong> at peak load.</li>
+                </ul>
+                </article>
+
+                <article class="card tilt reveal">
+                    <div class="thumb">
+                        <span class="pill" style="color: #000;">Work · Mobileum</span>
+                        <img src="assets/ci-cd-pipeline.png" alt="CI/CD Pipeline Modernization" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
+                    </div>
+                    <h3>System Reliability & CI/CD Modernization</h3>
+                    <p>Modernized build pipelines and improved overall system reliability by refactoring legacy components, introducing proactive monitoring, and adopting SOLID design principles. These efforts reduced build times, cut downtime, and enhanced deployment confidence.</p>
+                    <div class="tags">
+                        <span class="tag">Maven</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Monitoring</span>
+                        <span class="tag">Clean Code</span>
+                        <span class="tag">Refactoring</span>
+                        <span class="tag">DevOps</span>
+                    </div>
+                    <ul>
+                        <li>Migrated build system from Ant → <strong>Maven</strong>, reducing CI pipeline build times by <strong>40%</strong>.</li>
+                        <li>Introduced automated alerting/monitoring dashboards → improved incident response by <strong>20%</strong>.</li>
+                        <li>Refactored legacy modules to follow SOLID principles → reduced tech debt by <strong>25%</strong>.</li>
+                    </ul>
+                </article>
+
+                <article class="card tilt reveal">
+                    <div class="thumb"><span class="pill" style="color: #000;">Work · Security</span>
+                        <img src="assets/Multifactor-Authentication.png" alt="MFA & Access Hardening" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
+                    </div>
+                    <h3>Multifactor Authentication — Platform‑wide Security Upgrade</h3>
+                    <p>Led the end‑to‑end design and development of a platform‑wide multi‑factor authentication (MFA) and access hardening system for the SITE platform.</p>
+                    <div class="tags"><span class="tag">Java</span><span class="tag">Spring Security</span><span class="tag">MFA (Email/App)</span><span class="tag">API Gateway</span><span class="tag">Security Architecture</span></div>
+                    <ul>
+                        <li>Implemented two MFA methods — <strong>email‑based OTP</strong> and <strong>app‑based authenticator</strong> — configurable by admins.</li>
+                        <li>Built admin‑level configuration: admins decide which users require MFA; users register and manage their MFA devices.</li>
+                        <li>Delivered end‑to‑end: system architecture, Java/Spring implementation, testing, deployment, and release management.</li>
+                    </ul>
+                </article>
+
+                <article class="card tilt reveal">
+                    <div class="thumb"><span class="pill" style="color: #000;">Work · Development</span>
+                        <img src="assets/tree.png" alt="SmartPhoneExperience Trace" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
+                    </div>
+                    <h3>SmartPhoneExperience Trace</h3>
+                    <p>Re-architected the SmartphoneExperience (SX) module of the SITE platform to efficiently 
+                        generate execution trees from smartphone testcase traces.  
+                        By restructuring the pipeline, adding filters to segment traces into parallel PTCs, 
+                        and introducing lazy loading, I significantly reduced latency and improved performance 
+                        for the customers.</p>
+                    <div class="tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Graph/Tree</span>
+                        <span class="tag">JSON</span>
+                        <span class="tag">Caching</span>
+                        <span class="tag">Performance Optimization</span>
+                    </div>
+                    <ul>
+                        <li>Parsed smartphone testcase traces into a <strong>hierarchical execution tree</strong> with parent/child edges, timing, and status.</li>
+                        <li>Introduced filtering to split traces into multiple PTCs (parallel trace components), improving scalability.</li>
+                        <li>Implemented lazy loading of tree nodes for large traces → reduced latency and improved UI responsiveness.</li>
+                    </ul>
+                </article>
+
+                <article class="card tilt reveal">
+                    <div class="thumb"><span class="pill" style="color: #000;">Internship</span>
+                        <img src="assets/water-supply.png" alt="Spot Billing App" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy">
+                    </div>
+                    <h3>Spot Billing App (BWSSB · SAJALA)</h3>
+                    <p>Developed during my internship with NIC, this Flutter-based Android app automated water bill generation for each customer, reducing manual effort and ensuring accurate billing.</p>
+                    <div class="tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">Web APIs</span>
+                        <span class="tag">Android</span>
+                    </div>
+                    <ul>
+                        <li>Enabled real-time meter reading with instant, on-device bill generation.</li>
+                        <li>Reduced manual billing errors by <strong>40%</strong> and improved accuracy by <strong>30%</strong>.</li>
+                        <li>Cut billing process time by <strong>50%</strong> through automation and concurrency handling.</li>
+                        <li>Designed offline-first functionality to ensure uninterrupted billing in low-network areas.</li>
+                        <li>Integrated with backend APIs for secure data sync and centralized reporting.</li>
+                    </ul>
+                </article>
+
+                <article class="card tilt reveal">
+                <div class="thumb"><span class="pill" style="color: #000;">Academic Project</span>
+                    <img src="assets/marks-management.png" alt="Marks Management System" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"
+                    loading="lazy">
+                </div>
+                <h3>Continuous Assessment Marks Management</h3>
+                <p>Built during my B.Tech at Banasthali Vidyapeeth, this React-based web application automated internal marks submission, ensuring accuracy and reducing faculty workload.</p>
+                <div class="tags">
+                    <span class="tag">React</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">Web API</span>
+                </div>
+                <ul>
+                    <li>Enabled professors to submit marks digitally for any subject and semester.</li>
+                    <li>Automated direct submission to admin systems → reduced manual errors by <strong>20%</strong>.</li>
+                    <li>Lowered teacher administrative workload by <strong>80%</strong>.</li>
+                    <li>Designed dashboards for streamlined subject-wise entry and verification.</li>
+                    <li>Improved transparency and speed of assessment processing across departments.</li>
+                </ul>
+                </article>
+
+            </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Skills & Tech</h2>
+                <div class="section-sub">Exactly what I use to deliver the results above.</div>
+            </div>
+            <div class="skills">
+                <div class="skill-card reveal">
+                <h3>Backend</h3>
+                <p class="section-sub">APIs • microservices • performance</p>
+                <div class="rings">
+                    <div class="ring" data-label="Java/Spring" data-value="92"><span>92%</span><label>Java/Spring</label></div>
+                    <div class="ring" data-label="Concurrency" data-value="88"><span>88%</span><label>Concurrency</label></div>
+                    <div class="ring" data-label="Kafka" data-value="80"><span>80%</span><label>Kafka</label></div>
+                </div>
+                <br />
+                <ul>
+                    <li>Java, Spring Boot, RESTful APIs, Python (utility scripts).</li>
+                    <li>Kafka for inter‑service streaming; idempotency & retries.</li>
+                    <li>Security: MFA, encryption, RBAC; API gateways.</li>
+                </ul>
+                </div>
+                <div class="skill-card reveal">
+                <h3>Data & DB</h3>
+                <p class="section-sub">SQL tuning • schema design</p>
+                <div class="rings">
+                    <div class="ring" data-label="MySQL" data-value="86"><span>86%</span><label>MySQL</label></div>
+                    <div class="ring" data-label="SQL Perf" data-value="84"><span>84%</span><label>SQL Perf</label></div>
+                    <div class="ring" data-label="Caching" data-value="82"><span>82%</span><label>Caching</label></div>
+                </div>
+                <br />
+                <ul>
+                    <li>MySQL; schema normalization; read replicas; materialization.</li>
+                    <li>Cache DB for reports; lazy loading; query plans & indexes.</li>
+                </ul>
+                </div>
+                <div class="skill-card reveal">
+                <h3>Frontend & DevOps</h3>
+                <p class="section-sub">Vue/React • CI/CD • testing</p>
+                <div class="rings">
+                    <div class="ring" data-label="Vue/React" data-value="78"><span>78%</span><label>Vue/React</label></div>
+                    <div class="ring" data-label="CI/CD" data-value="76"><span>76%</span><label>CI/CD</label></div>
+                    <div class="ring" data-label="Testing" data-value="74"><span>74%</span><label>Testing</label></div>
+                </div>
+                <br />
+                <ul>
+                    <li>Vue.js, React.js, JavaScript, jQuery.</li>
+                    <li>GitHub, Docker, Maven; Agile (Scrum), JIRA, Confluence.</li>
+                </ul>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Experience</h2>
+                <div class="section-sub">What I did, where, and the measurable outcomes.</div>
+            </div>
+            <div class="timeline">
+                <div class="t-item reveal">
+                <div class="t-role">Software Engineer — Mobileum (R&D Core)</div>
+                <div class="t-meta">Apr 2024 – Present · Bengaluru, India (Hybrid)</div>
+                <ul>
+                    <li>SQL cache DB for reports → retrieval <strong>↑ 40%</strong>; server load reduced.</li>
+                    <li>Lazy loading in Spring Boot microservices → latency <strong>↓ 50%</strong>.</li>
+                    <li>Kafka for event streaming; parallel pipelines via <em>Executors</em> & <em>CompletableFuture</em>.</li>
+                    <li>Security hardening: MFA, encryption, RBAC, email verification policies.</li>
+                    <li>Mentored 3 juniors; sprint velocity <strong>↑ 20%</strong>; code review lead.</li>
+                </ul>
+                </div>
+                <div class="t-item reveal">
+                <div class="t-role">Associate Software Engineer — Mobileum</div>
+                <div class="t-meta">Dec 2021 – Apr 2024 · Bengaluru, India</div>
+                <ul>
+                    <li>Reusable Vue components; improved API concurrency; page loads <strong>↓ 40%</strong>.</li>
+                    <li>Unit tests from 20% → <strong>65%</strong> coverage; production issue rate reduced.</li>
+                    <li>Refactored to SOLID; migrated Ant → <strong>Maven</strong> (CI time <strong>↓ 40%</strong>).</li>
+                    <li>Proactive debugging & log monitoring → support tickets <strong>↓ 20%</strong>.</li>
+                </ul>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Let's Connect !</h2>
+                <div class="social" aria-label="Social links" style="margin-right: 750px;">
+                <a href="https://github.com/in-mansi-gupta" target="_blank" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://leetcode.com/u/in_mansi_gupta/" target="_blank" aria-label="LeetCode" title="LeetCode"><i class="fa-solid fa-laptop-code"></i></a>
+                <a href="https://www.linkedin.com/in/mansi-gupta-04-03/" target="_blank" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:in.mansi.gupta@gmail.com" target="_blank" aria-label="Email" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <small>© <span id="year"></span> Mansi Gupta. All rights reserved.</small>
+            </div>
+            </div>
+        </section>
+
+        <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // theme toggle
+    (function(){
+      const key='theme-preference'; const root=document.documentElement; const btn=document.getElementById('themeToggle');
+      const saved=localStorage.getItem(key); if(saved) root.setAttribute('data-theme', saved);
+      btn.addEventListener('click',()=>{const cur=root.getAttribute('data-theme')==='light'?'dark':'light'; if(cur==='dark') root.removeAttribute('data-theme'); else root.setAttribute('data-theme','light'); localStorage.setItem(key, root.getAttribute('data-theme')||'dark');});
+    })();
+
+    // reveal on scroll
+    const revealEls=[...document.querySelectorAll('.reveal')];
+    const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);}})},{threshold:.15});
+    revealEls.forEach(el=>io.observe(el));
+
+    // tilt
+    document.querySelectorAll('.tilt').forEach(card=>{let rect; const damp=20; function update(e){rect=rect||card.getBoundingClientRect(); const x=e.clientX-rect.left; const y=e.clientY-rect.top; const rx=((y/rect.height)-.5)*-damp; const ry=((x/rect.width)-.5)*damp; card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;} card.addEventListener('mousemove',update); card.addEventListener('mouseleave',()=>{rect=undefined; card.style.transform='perspective(800px) rotateX(0) rotateY(0)';});});
+
+    // rings animate when skills appear
+    function animateRings(){document.querySelectorAll('.ring').forEach((ring,idx)=>{const val=parseInt(ring.getAttribute('data-value')||'0',10); let cur=0; const step=()=>{cur+=Math.max(1,Math.round(val/40)); if(cur>val) cur=val; ring.style.setProperty('--val',cur); ring.querySelector('span').textContent=cur+'%'; if(cur<val) requestAnimationFrame(step);}; setTimeout(step,200+idx*180);});}
+    const skillsSection=document.getElementById('skills');
+    const skillsIO=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateRings(); skillsIO.disconnect();}})},{threshold:.2});
+    skillsIO.observe(skillsSection);
+
+    // back to top
+    const toTop=document.getElementById('toTop'); window.addEventListener('scroll',()=>{ if(window.scrollY>500) toTop.classList.add('show'); else toTop.classList.remove('show');}); toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+
+    </body>
+</html>
