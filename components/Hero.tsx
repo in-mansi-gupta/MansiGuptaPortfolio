@@ -92,7 +92,7 @@ export default function Hero() {
         {/* CTA buttons */}
         <div className="flex flex-wrap gap-3">
           <a
-            href="https://drive.google.com/file/d/1vRLyAPo1ZR899nrYW_UOCo8AxNxyp3Ey/view?usp=drive_link"
+            href="https://drive.google.com/file/d/1_TTdyLO71wbDETFzH0jEDE8X3tU-mNZU/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
